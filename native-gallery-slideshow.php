@@ -1,7 +1,7 @@
 <?php
 /**
 * Plugin Name: Native Gallery Slideshow
-* Plugin URI: http://www.cuberis.com
+* Plugin URI: https://github.com/isabisa/native-gallery-slideshow
 * Description: Adds a select box to the native WordPress gallery screen, which allows you to choose between the default grid style gallery or slideshow. Uses Cycle2 for the slideshow functionality.
 * Version: 1.0
 * Author: Alisa R. Herr
