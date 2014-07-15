@@ -118,7 +118,7 @@ function custom_gallery_shortcode( $attr ) {
      *                    Defaults to false if the theme supports HTML5 galleries.
      *                    Otherwise, defaults to true.
      */
-    if ( apply_filters( 'use_default_gallery_style', ! $html5 ) ) {
+    if ( apply_filters( 'use_default_gallery_style', ! $html5 && $type !== 'slideshow' ) ) {
         $gallery_style = "
         <style type='text/css'>
             #{$selector} {
@@ -147,8 +147,12 @@ function custom_gallery_shortcode( $attr ) {
 
     if ($type == 'slideshow') {
         $slide_class = 'cycle-slideshow';
-        $slide_data_atts = 'data-cycle-fx="scrollHorz" data-cycle-timeout="0" data-cycle-slides="> figure" data-cycle-prev="#slide-prev" data-cycle-next="#slide-next" data-cycle-auto-height="container" data-cycle-swipe="true"';
-        $slide_controls = '<a class="slide-controls" href="#" id="slide-prev"></a><a class="slide-controls" href="#" id="slide-next"></a>';
+        if ( !$html5 ) {
+            $slide_data_atts = 'data-cycle-fx="scrollHorz" data-cycle-timeout="0" data-cycle-slides="> dl" data-cycle-prev="#slide-prev" data-cycle-next="#slide-next" data-cycle-auto-height="container" data-cycle-swipe="true"';
+        } else {
+            $slide_data_atts = 'data-cycle-fx="scrollHorz" data-cycle-timeout="0" data-cycle-slides="> figure" data-cycle-prev="#slide-prev" data-cycle-next="#slide-next" data-cycle-auto-height="container" data-cycle-swipe="true"';
+        }
+        $slide_controls = '<a class="slide-controls prev" href="#" id="slide-prev"></a><a class="slide-controls next" href="#" id="slide-next"></a>';
         $slide_wrapper_start = '<div class="cycle-gallery-wrapper">';
         $slide_wrapper_end = '</div>';
 
@@ -199,12 +203,12 @@ function custom_gallery_shortcode( $attr ) {
                 </{$captiontag}>";
         }
         $output .= "</{$itemtag}>";
-        if ( ! $html5 && $columns > 0 && ++$i % $columns == 0 ) {
+        if ( ! $html5 && $columns > 0 && ++$i % $columns == 0 && $type !== 'slideshow' ) {
             $output .= '<br style="clear: both" />';
         }
     }
 
-    if ( ! $html5 && $columns > 0 && $i % $columns !== 0 ) {
+    if ( ! $html5 && $columns > 0 && $i % $columns !== 0 && $type !== 'slideshow' ) {
         $output .= "
             <br style='clear: both' />";
     }

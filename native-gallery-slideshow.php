@@ -41,19 +41,19 @@ function ngs_add_gallery_options() {
 	?>
 	<script type="text/html" id="tmpl-ngs-custom-gallery-options">
 		<label class="setting">
+		<span><?php _e('Type'); ?></span>
+		<select data-setting="type">
+		<option value="grid">Grid</option>
+		<option value="slideshow">Slideshow</option>
+		</select>
+		</label>
+		<label class="setting">
 		<span><?php _e('Size'); ?></span>
 		<select data-setting="size">
 		<option value="thumbnail">Thumbnail</option>
 		<option value="medium">Medium</option>
 		<option value="large">Large</option>
 		<option value="full">Full</option>
-		</select>
-		</label>
-		<label class="setting">
-		<span><?php _e('Type'); ?></span>
-		<select data-setting="type">
-		<option value="grid">Grid</option>
-		<option value="slideshow">Slideshow</option>
 		</select>
 		</label>
 	</script>
@@ -64,7 +64,7 @@ function ngs_add_gallery_options() {
 			// add your shortcode attribute and its default value to the gallery settings list;
 			_.extend(wp.media.gallery.defaults, {
 				size: 'thumbnail',
-				type: 'grid',
+				type: 'slideshow',
 				link: 'file'
 			});
 
@@ -79,5 +79,8 @@ function ngs_add_gallery_options() {
 		});
 	</script>
 	<?php
+
+	// TODO: Look at: http://shibashake.com/wordpress-theme/how-to-expand-the-wordpress-media-manager-interface
+	// Figure out how to make size only appear if type is grid. Maybe this will help: http://phpxref.ftwr.co.uk/wordpress/nav.html?wp-includes/js/media-views.js.source.html line 6139
 
 }
